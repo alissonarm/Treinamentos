@@ -1,0 +1,208 @@
+1) Clonando o projeto: 
+git clone https://github.com/jcfonsecagit/repositorio.git
+
+2) listar as versões do projeto: 
+git tag ( executar o comando dentro do diretório clonado)
+
+3) buscar uma versão específica:
+git checkout v0.1 ( executar o comando dentro do diretório clonado)
+
+4) listar as diferenças entre vesões:
+git diff v0.1 v0.2 ( executar o comando dentro do diretório clonado)
+
+5) listar quem realizou as alterações:
+git blame index.html ( executar o comando dentro do diretório clonado)
+
+6) indicar a pasta que será o repositório de trabalho.
+git init
+
+7) verificar o estado dos arquivos
+git status
+
+8) prepara o arquivo para ser commitado;
+git add index.html
+
+8.1) Adicionando múltiplos arquivos:
+git add arquivo1 arquivo2; ou
+git add caminhoDeUmDiretorio; ou
+git add . (adiciona todos arquivos do diretorio atual)
+
+
+9) listar arquivos do repósitorio
+git ls-files
+
+10) gravar as arquivo no repósitorio
+git commit -m "criacao do projeto"
+
+10.1) 
+git commit --amend -m "corrigindo a descrição do projeto" 
+
+11) Configurar usuario e email
+a) configurar o usuario somente na pasta; git config --local user.name "Alisson Augusto Ribeiro Mendonça"
+b) configurar o usuario para todo o sistema: git config --global user.name "João Carlos Fonseca"
+c) configurar o email somente para a pasta: git config --local user.email "jcfonsecagit@gmail.com"
+d) configurar o email para todo o sistema: git config --global user.email "jcfonsecagit@gmail.com"
+e) consultar configuracao: git config user.name ou git config user.email
+
+12) listar histórico dos commits
+git log
+git log --oneline (apresenta uma linha de informações do commit)
+git log -p (apresenta detalhes dos commits)
+git log --graph (apresenta um grafico)
+
+13) detalhar alterações em cada commit
+git whatchanged -p
+
+14) apontar o diretório remoto
+a)git remote add <nome_do_repositorio> <url_do_repositorio> : git remote add origin https://github.com/alissonarm/curso-git.git; 
+b) consulta endereço do repositorio: git remote -v 
+c) renomear o nome do repositorio: git remote rename origin local
+
+15) Enviar os arquivos da branch master para o repositorio chamado origin
+git push <origin> master
+
+16) listar as branch existentes:
+git branch
+git branch -a (também lista as remotas)
+git branch -r (lista as remotas)
+git branch -d <nome da branch> - delete uma branch
+git branch -D <nome da branch> - delete uma branch com commit a frente da master
+
+17) Criar um branch com o nome de design
+git branch <design>
+git branch <design> -b (cria e ja altera)
+
+18) muda a branch de trabalho( git checkout + branch destino)
+git checkout <desing>
+
+19) criar a branch remota ratreavel, criando uma ligação entre a branch local e a remota. 
+git push -u origin design
+
+20) Para um novo desenvolvedor criar a branch design. Desta forma a nova branch local ira sempre se referi a branch remota design.
+git branch -t design origin/design
+
+21) Deletar uma branch:
+git branch -d
+
+22) Remover a branch remota design:
+git push -d origin design; ou
+git push origin :design
+
+23) Verificar todas as atualizações que foram realizadas no repositório de atalho origin.
+git fetch origin
+
+24) Dentro da master, fazer o marge com a branche desenvolvimento local
+git marge desenvolvimento
+
+25) Atualizar a branch desenvolvimento com os commits da master
+git rebase master desenvolvimento
+git rebase --continue ( continuação da atualização após resolução do conflito)
+git rebase --skip ( descartas as alterações)
+git rebase --abort( volta atrás em todo processo de rebase);
+
+26) Verificar diferencas entre dois commits ou o que foi alterado e não commitado
+git diff <id1>.. <id2> : mostra a diferentre id1 até id2;
+git diff : mostra o que foi alterado e não foi adicionado para commit;
+
+27) Fazendo marco(Releases) no commit. 
+git tag -a v0.1.0  -m "Lançando a primeira versão (BETA)"
+git tag : mostra todas as tag disponiveis
+git push local v0.1.0 : enviar para o servidor chamado local a tag
+
+28) listar os servidores remotos:
+git remote -v
+
+29) Desfazer as alterações não adicionadas:
+git checkout -- <index.html> : desfaz as alteraçoes do arquivo chamado index;
+
+30) Desfazer a situação do arquivo adicionionado mas não commitado:
+git reset HEAD <index.html>  : volta a situação do arquivo index.html para alterado e não adicionado. 
+
+31) Desfazer um commit
+git revert <identificador>: faz um commit desfazendo 
+
+32) Salvar as alterações em local temporário:
+git stash : salva as alterações em local temporário
+git stash list : Lista tudo que foi salvo na pasta temporária
+git stash apply <0> : Busca e faz o merge da alteração com o numero 0 da pasta temporária;
+git stash drop <0>: apaga a alteração numero 0 da pasta temporária; 
+git stash pop : Busca e faz o merge a ultima alteração da pasta temporária e apaga ela;
+
+33) git cherry-pick <id> --> traz um commit especifico para o HEAD
+
+34) Buscar uma alteração especifica
+git bisect start 
+git bisect bad HEAD
+git bisect good <id>
+
+35) Ver todas as alterações de um commit
+git show <id>
+
+36) mostra o responsável pela alteração em cada linha
+git blame <arquivo> 
+
+
+============
+git push origin master
+
+
+
+
+gitk (ferramenta)
+
+criação de alias
+vim ~/.gitconfig
+
+	[alias]
+		    st = status
+                    co = checkout
+	            envia = !git checkout master && git pull && git checkout desenvolvimento && git rebase master && git checkout master && git merge desenvolvimento && git push
+
+
+git checkout master: altera o local de trabalho para a branch master
+git pull: atualiza o histórico da branch master
+git checkout dev: altera o local de trabalho para a branch dev
+git rebase master: atualiza o HEAD da branch dev para receber as alterações da branch master
+git checkout master: altera o local de trabalho novamente para a branch master
+git merge dev: mescla as alterações da branch dev na master
+git push: envia suas alterações para o repositório remoto
+
+revisão 1:
+git brach ( listar as branc)
+git checkout -b desenv ( cria uma nova brach, com nome de desenv, e ja muda para ela ) 
+git add index.html ( adiciona a alteração na branch desenv)
+git commit -m "colocando paragrafo ( commitar alteração na branch desenv)
+
+git checkout master ( muda para a branch master) 
+git pull ( atualiza branc master com o repositorio remoto) 
+git rebase master desenv ==> atualizar a branch desenvolvimento com a master 
+
+========================
+comandos vim:
+:q - salva;
+:wq - salva e sai;
+=============
+revisao 2;
+Após alteração dos fontes:
+- git add <arquivo>       --> para adicionar alteração; ou  
+- git checkout <arquivo>  --> para descartar alteração
+
+Após git add:
+- git commit -m "comentario"   --> commit;
+- git reset HEAD <arquivo>     --> para descartar alteração;
+
+- git push local master     --> enviar os arquivos da master para o repositório chamado local;
+- git pull local master     --> traz os arquivos do repositorio chamado local para a master; 
+
+- git checkout -b <lista>  --> criar uma nova branch chamada lista e ja posiciona nele;
+
+- git merge <titulo>        --> faz o merge da branch atual(master) com o branch titulo ;
+
+- git rebase <titulo>       --> atualizar a branch atual(master) com os commits existentes na banch titulo;  
+
+- git reset HEAD <index.html>  --> Volta a situação do arquivo que foi adicionadas mas não commitadas; 
+- git checkout -- <index.html> --> desfaz as alterações deste mesmo arquivo;
+
+- git checkout <id>     --> volta para o commit informado. Porém se faz necessário o comando git checkout -b <novaBranch> para criação de uma nova branch
+
+- git rebase -i <id do ultimo commit>   - faz junção de vários commits

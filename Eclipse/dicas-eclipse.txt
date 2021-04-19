@@ -1,0 +1,50 @@
+ctrl+M      ==> maximizar aba;
+ctrl+O      ==> apresenta todos os membros da classe
+ctrl+T      ==> apresenta as subclasses de uma classe ou apresenta todas as classes que subscreve um método;
+ctrl+1      ==> apresenta as sugestões para  correções de erros
+ctrl+3      ==> permite chamar qualquer menu
+ctrl+F11    ==> executa a ultima classe executada
+ctrl+F8     ==> Mudar perspectivas-
+ctrl+F      ==> procurar dentro do arquivo
+ctrl+J      ==> busca incremental ( ctrl+K ou ctrl+shift+K ==> proxima ocorrencia ou ocorrencia anterior;
+ctrl+H      ==> busca em todo projeto ou pasta ou workspace; ctrl+. ou ctrl+,  proximo ou ocorrencia anterior
+ctrl+W      ==> fechar a aba selecionada.
+ctrl+N      ==> criar novo arquivo(classe, projeto, interface, enum ) 
+ctrl+espaço ==> completar código (classe, métodos, etc) 
+ctrl+PgUp ou ctrl+PgDown ==> Para navegar nas abas abertas
+ctrl+shift+G ==> Encontra onde é utilizados a classe ou metodo;
+ctrl+shift+T ==> Abre uma classe pelo nome;
+ctrl+shift+F ==> formatar e identar o código
+ctrl+shift+W ==> Fecha todas as janelas abertas
+ctrl+shift+L ==> Exibe todos os atalhos possíveis
+ctrl+shift+R ==> pesquisar qualquer arquivo de qualquer projeto aberto
+ctrl+shift+B ==> insere ou remove breakpoint
+ctrl+alt+H ==> encontra uso de métodos
+ctrl+alt+seta para baixo ou para cima ==> replica a linha 
+
+main+ctrl+espaço ==> gerar o método main;
+
+F3(no tipo da classe) ==> Abre a classe em nova aba
+
+alt+shift+A ==> para seleção em bloco
+alt+shift+R ==> renomear/refactor
+alt+shift+T ==> Exibe o menu Refactor
+alt+seta para baixo ou para cima ==> move toda a linha para cima ou para baixo
+alt+shift+M ==> Extrair um método
+alt+shift+X,T ==> executar o teste
+alt+shift+D,T ==> muda a perspectiva para debug
+alt+seta para direita ou esquerda ==> avança ou volta
+
+Em perspectiva DEBUG: 
+F6      ==> proxima linha (avançar)
+F8      ==> proximo breakpoint
+F5      ==> entrar no método
+F7      ==> sai do método
+ctrl+R  ==> continua a execução até a linha do cursor
+ctrl+F2 ==> parar a execução atual
+ctrl+
+ctrl+shift+D ==> mostra o valor da variavel e abre a aba display 
+ctrl+shift+I ==> abre o valor da expressão selecionada
+
+
+

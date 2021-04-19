@@ -1,0 +1,60 @@
+Comando
+ls -a : Listar arquivos e pastas ocultas;
+mv Arquivo CaminhoDestinho ==> copiar arquivso
+
+
+
+1) pwd: informações do diretório atual;
+2) ls: lista os arquivos;
+2.a) ls -la : lista todos arquivo e diretórios ocultos;
+2.b) ls -l : lista tamanhos, datas e tipos de arquivos;
+2.c) ls / : lista o diretório raiz;
+c.d)ls /home: lista o diretório dos usuários da maquina;
+3) echo : imprime mensagens no terminal.
+3.a) echo "Bem vindo" : saida no terminal;
+3.b) echo "Bem vindo" > bemvindo.txt : a saída é no arquivo criado;  o operador ">" modifica o destino da mensagem;
+3.c) echo "segunda linha" >> bemvindo.txt: adiciona outra linha;
+4) cat: lista o arquvo no terminal; cat bemvindo.txt
+4.a) cat -v: apresenta caracteres escondidos(quebras de linhas);
+4.b) cat -n: apresenta as linhas além do conteúdo do arquivo;
+5) clear : limpar a tela;
+6 ) man : apresenta o help dos comando;
+7) whoami: retorna o nome do usuário no linux;
+8) cd : navegar para o diretório base;
+8.a) cd . : navegar para o diretório atual;
+8.b) cd..: navegar para o diretório anterior;
+9)mkdir : criar diretório;
+10) rmdir : apaga diretório vazio;
+10.a) rm arquivo: apaga arquivo;
+10.b) rm -r diretório/ : apaga tudo arquivos e o diretório;
+11) cp msg.txt bv.txt : copiar arquivo;
+11.a) cp /home/f0500025/Downloads/settings.xml settings.xml -- copiar arquivo
+11.a) cp -r diretorio1 diretorio2 : copiar diretórios; 
+12) mv msg.txt msg2.txt : renomeia o arquivo;
+13) zip -r work.zip diretorio/ : zipar todo o diretório; 
+13.a) zip -rq work.zip workspace : zipar todo o diretório sem as mensagens;
+14) unzip work.zip: descompactar o arquivo selecionado;
+14.a) unzip -q work.zip : descompactar whoasem as mensagens;
+14.b) unzip -l work.zip : listar arquivos zipados
+15) tar -cz diretorio > work.tar.gz : outro comando de compactação;
+15.a) tar -czf work.tar.gz diretorio
+16) tar-xz < work.tar.gz : comando de descompactação;
+16.a) tar -xzf work.tar.gz : comando de descompactação;
+16.b) tar -vxzf work.tar.gz : comando de descompactação;
+17) touch arquivo.txt: muda a data do arquivo;
+18) head -n 3 google.txt: ler as 3 primeiras linhas;
+19) tail -n 3 google.txt: ler as ultimas 3 linhas;
+20) less google.txt : permite navegar atraves de setas;
+21) vi google.txt : editor de texto do linux;
+
+Resumindo os comandos que vimos do VI, até agora temos:
+Setas: para navegação
+i: inclui (na posição atual)
+a: adiciona (na posição posterior)
+Shift+A: adiciona (fim da linha)
+x: remove caracteres (n* x remove *n caracteres)
+dd: remove uma linha (n* dd remove *n linhas)
+
+Para voltarmos à navegação e saírmos do modo de inclusão, pressionamos a tecla ESC. Para salvarmos essas alterações usamos o comando :w e para sair do VI, digitamos :q.
+
+Podemos juntar os comandos de salvar e sair em apenas um comando: :wq. Se quisermos sair sem salvar, precisamos usar o comando :q!.
