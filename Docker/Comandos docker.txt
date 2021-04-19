@@ -1,0 +1,60 @@
+Principais estados de um container
+1) Running; 
+2) Stopped;
+
+Stopped   ====> (docker start) ====> Running    ====>  ( docker stop) ===> Stopped 
+
+Para enviar a imagem criada para o Docker HUB, execute os comandos abaixo no terminal:
+1) docker login
+2) docker push alisson/node
+
+docker pull ubuntu ==>  baixa a imagem ubuntu do Docker Hub
+docker pull NOME_USUARIO/NOME_IMAGEM ==> baixa imagem de um usuario específico
+docker pull douglasq/alura-books:cap05   (utilizando a tag cap05)
+
+
+docker ps         ==> listar os containers ativos
+docker ps -a   ==> listar todos os containers
+docker ps -q  ==> Listar apenas os identificadores dos containers
+
+docker run "imagem"  ==> comando para baixar e executar a imagem. Gerar o containers
+docker run -it ubuntu ==> comando para iteração com o ubuntu.  ==> conecta o terminal que estamos utilizando com o do container.    (ctrl + d para encerrar).
+docker run -d "image" ==> opção baixar e não deixar preso o terminal 
+docker run -d -P "image" ==> informando -P gerar uma porta aleatoria com mapeamento entre o container e o computador.
+docker run -d -p 12345:80 dockersamples/static-site ==> -p você informa as portas mapeadas
+docker run -d -P --name meu-site dockersamples/static-site ==> --name  nomeia os containers
+docker run -d -P -e AUTHOR="aLISSON" dockersamples/static-site ===> -e para setar uma variavel de ambiente
+docker port id(chave)    ==> listar as portas utilizadas pelo container
+
+docker run -v "/var/www" ubuntu    ==> baixa a imagem ubuntu criando um volume
+docker run -it -v "C:\Users\f0500025\Documents\Docker:/var/www" ubuntu   ==> criar o volume relacionando com uma pasta de trabalho no desktop
+docker run -d -p 8080:3000 -v "C:\Users\f0500025\Documents\Docker\volume-exemplo:/var/www" -w "/var/www" node npm start  ==> cria um cotainer do node, cria um volume , passa um comando(npm start na pasta /var/www) e mapeia a porta 8080 do computador com a porta 3000 do container
+
+docker inspect id(chave) ===> inspecionar dados do container
+
+docker start id(chave do container) == iniciar o container ja baixado
+docker start -a -i    ==> iniciar o container no modo integrado de terminais 
+docker stop id(chave do container)  == parar o container    ( o padrão aqui é de 10 segundos )
+docker stop -t 0 id (chave) ==> tempo de execução do comando. neste caso 0 segundos. 
+docker stop $(docker ps -q)  ==> para os container retornados na pesquisa retornados dentro do parenteses.
+
+docker rm id(chave) ===> remove um container
+docker rm -f id(chave)  =====> remove e força o stop do container
+docker container prune ==> irá remover todos os container inativos. 
+
+docker images ===> listar as imagens
+docker rmi id(chave)==> remover a imagem
+
+docker network create --driver bridge  minha-rede ==> comando para criação de rede de containers chamada de minha-rede
+docker network ls   ==> lista as redes criadas
+docker network inspect minha-rede ==> inspeciona a minha rede;
+
+docker run -it --name meu-container-de-ubuntu --network minha-rede ubuntu  ==> Este comando cria um container chamado de meu-container-de-ubuntu atrelando a rede minha-rede
+
+
+docker-compose buid ==> executar o comando na pasta do arquivo docker-compose.yml para buildar o documento. 
+docker-compose up  ==> executa todos os comandos que existente no docker-compose.yaml     (docker-compose restart faz o mesmo)
+docker-compose up -d ==> em modo detached
+docker-compose ps ==> listar ativos 
+docker-compose down ==> para os containers e remove
+docker exec -it alura-books-1 ping alura-books-2     ==> faz o ping entre containers
