@@ -1,0 +1,26 @@
+Cluster:
+- 1 ou 2 máquinas trabalhando em paralelo dividindo o poder operacional;
+- As máquinas dentro do cluster recebem denominação diferentes: 
+  - MASTER (API, C-M, SCHED, ETCD): CONTROL PLANE
+       - Responsavel por coordenar/gerenciar o cluster;
+       - Manter e atualizar o estado desejado(estado do POD);
+       - Receber e executar novos comandos;
+  - NODE (KUBELET, K-PROXY): NODES
+       - Executar os PODs que encapsulam o container;
+       - Executar as aplicações;
+
+kubernetes:
+- Cria e gerencia o cluster;
+- Gerencia containers;
+- Faz a orquestração dos containers;
+- É capaz de reiniciar aplicações automaticamente em caso de falhas;
+
+POD:
+- Camada que encapsula um container no kubernetes;
+
+Kubcectl: 
+- Ferramenta que permite criar, ler, atualizar e remover os dados/componentes/recursos do cluster
+  de maneira declarativa ou imperativa;
+- Se comunica com a API que gerencia a comunicação com os recursos(POD, RS, DEPLOY, VOL);
+- Envia Requests para API;
+ 
