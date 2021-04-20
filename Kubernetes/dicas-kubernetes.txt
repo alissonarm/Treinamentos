@@ -15,8 +15,14 @@ kubernetes:
 - Faz a orquestração dos containers;
 - É capaz de reiniciar aplicações automaticamente em caso de falhas;
 
-POD:
-- Camada que encapsula um container no kubernetes;
+
+PODs:
+- Camada que encapsula um ou mais container no kubernetes;
+- São efêmeros;
+- Compartilham namespaces de rede e IPC;
+- Podem compartilhar volumes;
+- A comunicação entre containers do mesmo POD é feita via Localhost. 
+- Um POD é dado como encerrado quando todos os containes dentro do pod param de funcionar. 
 
 Kubcectl: 
 - Ferramenta que permite criar, ler, atualizar e remover os dados/componentes/recursos do cluster
@@ -24,3 +30,35 @@ Kubcectl:
 - Se comunica com a API que gerencia a comunicação com os recursos(POD, RS, DEPLOY, VOL);
 - Envia Requests para API;
  
+comandos:
+1) kubectl get nodes : lista os nodes 
+
+2) kubectl run nginx-pod --image=nginx:latest
+criar um pod:  
+- nome: nginx-pod
+- nome da imagem do container: nginx
+- versao: latest
+
+3) kubectl get pods 
+:=> para listar os pods;
+
+4) kubectl get pods --watch 
+:=> permite acompanhar as mudanças da situação dos pods 
+
+5) kubectl get describe pod nginx-pod 
+:=> descreve informações do pod
+
+6) kubectl edit pod nginx-pod 
+:=> permite editar informações do pod nginx-pod
+
+7) kubectl apply -f .\primeiro-pod.yaml
+:=> criação de pod via arquivo(primeiro-pod.yaml)
+
+8) kubectl delete pod nginx-pod 
+:=> deletar o pod nginx-pod
+
+9) kubectl delete -f .\primeiro-pod.yaml
+:=> deletar o pod criado via arquivo
+
+10) kubectl exec -it portal-noticias -- bash
+:=> abre um terminal dentro do pod portal-noticias 
