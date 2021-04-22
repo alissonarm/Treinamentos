@@ -15,6 +15,11 @@ kubernetes:
 - Faz a orquestração dos containers;
 - É capaz de reiniciar aplicações automaticamente em caso de falhas;
 
+Kubcectl: 
+- Ferramenta que permite criar, ler, atualizar e remover os dados/componentes/recursos do cluster
+  de maneira declarativa ou imperativa;
+- Se comunica com a API que gerencia a comunicação com os recursos(POD, RS, DEPLOY, VOL);
+- Envia Requests para API;
 
 PODs:
 - Camada que encapsula um ou mais container no kubernetes;
@@ -24,14 +29,27 @@ PODs:
 - A comunicação entre containers do mesmo POD é feita via Localhost. 
 - Um POD é dado como encerrado quando todos os containes dentro do pod param de funcionar. 
 
-Kubcectl: 
-- Ferramenta que permite criar, ler, atualizar e remover os dados/componentes/recursos do cluster
-  de maneira declarativa ou imperativa;
-- Se comunica com a API que gerencia a comunicação com os recursos(POD, RS, DEPLOY, VOL);
-- Envia Requests para API;
- 
+SERVICE (SVC)
+- Abstrações que expõe as aplicações executando em um ou mais pods.
+- Proveem IPs fixos para comunição;
+- Proveem um DNS estáveis para um ou mais pods;
+- São capazes de fazer balanceamento de carga.
+- Tipos de SVC:
+  - ClusterIP: Apenas para comunicação interna do cluster;
+  - NodePort: Permitem a comunição com o mundo externo ao cluster;
+  - LoadBalancer: Abre comunicação para o mundo externo usando o Load Balancer do provedor;
+
+CONFIG MAP(CM)
+- Responsavel por armazenar informações de configurações; 
+- Permite a reutilização e o desacoplamento;
+
+
+
+
+=============================================================
 comandos:
 1) kubectl get nodes : lista os nodes 
+   kubectl get pods -o wide  :
 
 2) kubectl run nginx-pod --image=nginx:latest
 criar um pod:  
@@ -45,20 +63,33 @@ criar um pod:
 4) kubectl get pods --watch 
 :=> permite acompanhar as mudanças da situação dos pods 
 
-5) kubectl get describe pod nginx-pod 
+5) kubectl get pods -o wide
+:=> formata a saida de maneira wide
+
+6) kubectl get describe pod nginx-pod 
 :=> descreve informações do pod
 
-6) kubectl edit pod nginx-pod 
+7) kubectl edit pod nginx-pod 
 :=> permite editar informações do pod nginx-pod
 
-7) kubectl apply -f .\primeiro-pod.yaml
+8) kubectl apply -f .\primeiro-pod.yaml
 :=> criação de pod via arquivo(primeiro-pod.yaml)
 
-8) kubectl delete pod nginx-pod 
-:=> deletar o pod nginx-pod
+9) kubectl delete pod nginx-pod 
+:=> deletar o pod nginx-pod 
 
-9) kubectl delete -f .\primeiro-pod.yaml
+10) kubectl delete -f .\primeiro-pod.yaml
 :=> deletar o pod criado via arquivo
 
-10) kubectl exec -it portal-noticias -- bash
+11) kubectl delete pods --all
+:=> deletar todos os pods em execução
+
+12) kubectl exec -it portal-noticias -- bash
 :=> abre um terminal dentro do pod portal-noticias 
+
+13) kubectl get svc
+    kubectl get service
+:=> retornam os serviços criados
+
+14) kubectl delete svc --all
+:=> deletar todos os serviços em execução
