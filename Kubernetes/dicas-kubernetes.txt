@@ -22,7 +22,7 @@ Kubcectl:
 - Envia Requests para API;
 
 PODs:
-- Camada que encapsula um ou mais container no kubernetes;
+- Estrutura que pode encapsular um ou mais container no kubernetes;
 - São efêmeros;
 - Compartilham namespaces de rede e IPC;
 - Podem compartilhar volumes;
@@ -43,11 +43,45 @@ CONFIG MAP(CM)
 - Responsavel por armazenar informações de configurações; 
 - Permite a reutilização e o desacoplamento;
 
+REPLICA SET(RS)
+- Estrutura que pode encapsular 1 ou mais PODs.
 
+DEPLOYMENT
+- Uma camada acima do Replica Set
+- Permite o controle de versionamento das imagens e pods.
+
+VOLUMES(vol)
+- Compartilha dados entre Containers;
+- Possuem ciclos de vida independentes dos containers. Porém, são dependentes dos pods. 
+
+Persistent Volumes(PV)
+- Resource independente do POD responsável por abstrair como o cloud provider armazena  os dados.
+- PersistentVolumes persistem dados de pods como um todo
+- PersistentVolumes possuem ciclo de vida independente de quaisquer outros recursos, inclusive pods
+
+Persistent Volumes Claims(PVC)
+- Serve como passaporte para o POD acessar o PV
+- Que precisamos de um PersistentVolumeClaim para acessar um PersistentVolume
+
+
+STORAGE CLASSES (SC)
+- Criam PV dinâmicamente conforme demanda.
+- Também são capazes de criar discos de armazenamento.
+- 
+
+STATEFUL SET (SS)
+- Podem ser usados quando estados devem ser persistidos. 
+- Usam PV e PVC para persistência de dados.
+
+PROBES
+- Tornar visível ao Kubernetes que uma aplicação não está se comportando da maneira esperada.
+
+HORIZONTAL POD AUTOSCALER(HPA)
 
 
 =============================================================
-comandos:
+Comandos:
+=============================================================
 1) kubectl get nodes : lista os nodes 
    kubectl get pods -o wide  :
 
@@ -66,7 +100,7 @@ criar um pod:
 5) kubectl get pods -o wide
 :=> formata a saida de maneira wide
 
-6) kubectl get describe pod nginx-pod 
+6) kubectl describe pod nginx-pod 
 :=> descreve informações do pod
 
 7) kubectl edit pod nginx-pod 
@@ -74,7 +108,7 @@ criar um pod:
 
 8) kubectl apply -f .\primeiro-pod.yaml
 :=> criação de pod via arquivo(primeiro-pod.yaml)
-
+ 
 9) kubectl delete pod nginx-pod 
 :=> deletar o pod nginx-pod 
 
@@ -93,3 +127,27 @@ criar um pod:
 
 14) kubectl delete svc --all
 :=> deletar todos os serviços em execução
+
+15) kubectl get rs
+:=> Listar os replicaset ativos
+
+16) kubectl get deployments
+:=> Listar os deployments ativos
+
+17) kubectl rollout history deployment ngnix-deployment
+:=> apresenta o histórico das alterações 
+
+18) kubectl annotate deployment nginx-deployment kubernetes.io/change-cause="Definindo a imagem com versao latest"
+:=> fazendo uma anotação 
+
+19) kubectl rollout undo deployment nginx-deployment --to-revision=2
+:=> voltar para uma versao especifica
+
+20) kubectl delete deployment nginx-deployment
+:=> deletar deployment chamado nginx-deployment
+
+21) kubectl delete -f .\portal-noticias-replicaset.yaml
+:=> deletar via arquivo o replicaset
+
+22) kubectl exec -it pod-volume --container nginx-container -- bash
+:=> executar em modo iterativo o container nginx-container
