@@ -1,0 +1,28 @@
+VGRANT: GERENCIANDO MAQUINAS VIRTUAIS
+
+Há outra maneira mais eficaz e barata chamada virtualização do sistema operacional, a qual comporta apenas um hardware com Windows por exemplo, visto que os equipamentos atuais podem ser bem poderosos. 
+Assim, é possível simular outros sistemas operacionais dentro de um principal que executarão vários projetos realizados por programas distintos dentro de uma máquina somente, sem sobrecarregá-la.
+
+Essa simulação ocorre em uma camada intermediária chamada Hypervisor que apresenta vários produtos conhecidos no mercado como Hyper-V, VMware e VirtualBox, sendo este último o que usaremos neste curso.
+
+O Vagrant entra como leitor e controlador do Hypervisor na linha de comando ao definir no arquivo de texto quais ferramentas e metodologias pretendemos utilizar para que o projeto funcione. 
+Ou seja, definimos a infraestrutura do código através deste recurso.
+
+vagrant version
+
+ansible: SGN-SGN-MICROSERVICE ( PROVISIONA E DESPROVISIONA ) - READ-ME
+
+1) Alterar o projeto SGN-SGN-MICROSERVICE: 
+ - Dentro do ROLES fazer uma cópia de um projeto já criado;
+ - No novo projeto adaptar o deployment, ingress, service, monitor;
+ - ajustar a porta, nome(até 15 ) , contexto(NOME DE SERVIÇO), imagem tá no ATF; 
+ - Test --> portbuild --> ./build.sh
+ - versao do projeto
+2) COMMITAR O PROJETO;
+3) ACOMPANHAR O BUILD:
+4) ALTERAR A TAG PARA NOVA VERSÃO E ACOMPANHAR O BUILD;
+5) portal de ofertas
+
+RANCHER; (infra.ci.intranet.bb.com.br) 
+
+READ-ME modo preview

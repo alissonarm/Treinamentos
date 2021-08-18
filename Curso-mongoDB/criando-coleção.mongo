@@ -1,0 +1,246 @@
+
+/* Criando Coleção */
+db.createCollection("alunos2")
+
+/* Inserindo o primeiro Aluno */
+db.alunos2.insert({
+    "nome": "Felipe",
+    "data_nascimento": ISODate('2000-01-01')
+})
+
+/* Inserindo o segundo Aluno */
+db.alunos2.insert({
+    "nome": "Felipe",
+    "data_nascimento": ISODate('2000-01-01'),
+    "curso": {
+        "nome": "Sistemas de Informações"
+    },
+    "notas": [10.0, 9.0, 4.5],
+    "habilidades": [
+        {
+            "nome": "inglês",
+            "nível": "avançado"
+        },
+        {
+            "nome": "taekwondo",
+            "nível": "básico"
+        }
+    ]
+})
+
+/* Listar todas as informações da coleção */
+db.alunos2.find()
+
+
+/* Removendo registro da coleção */
+db.alunos2.remove({
+    "_id": ObjectId("60fdc406139a832de0ab7e30")
+})
+
+
+/* Inserindo o terceiro Aluno */
+db.alunos2.insert({
+    "nome": "Julio",
+    "data_nascimento": ISODate('2001-01-01'),
+    "curso": {
+        "nome": "Medicina"
+    },
+    "habilidades": [
+        {
+            "nome": "inglês",
+            "nível": "avançado"
+        }
+    ]
+})
+
+/* Inserindo o quarto Aluno */
+db.alunos2.insert({
+    "nome": "Alberto",
+    "data_nascimento": ISODate('2002-01-01'),
+    "curso": {
+        "nome": "Engenharia Quimica"
+    },
+    "habilidades": [
+        {
+            "nome": "inglês",
+            "nível": "intermediario"
+        }
+    ]
+})
+
+/* Inserindo o quinto Aluno */
+db.alunos2.insert({
+    "nome": "Daniela",
+    "data_nascimento": ISODate('2003-01-01'),
+    "curso": {
+        "nome": "Moda"
+    },
+    "habilidades": [
+        {
+            "nome": "alemão",
+            "nível": "avançado"
+        }
+    ]
+})
+
+/* Listar todas as informações formatadas */
+db.alunos2.find().pretty()
+
+/* Filtrar pelo Felipe */
+db.alunos2.find({
+    nome: "Felipe"
+})
+
+/* Inserindo o sexto Aluno */
+db.alunos2.insert({
+    "nome": "Felipe",
+    "curso": "Matemática"
+})
+
+/* Filtrar pela Habilidade */
+db.alunos2.find({
+    "habilidades.nome": "inglês"
+})
+
+/* Filtrar pelo nome e pela Habilidade */
+db.alunos2.find({
+    "nome": "Felipe",
+    "habilidades.nome": "inglês"
+})
+
+/* Filtrar com o "or" */
+db.alunos2.find({
+    $or : [
+        {"curso.nome": "Sistemas de Informações"},
+        {"curso.nome": "Engenharia Quimica"}
+    ]
+})
+
+/* Filtrar com o "or" e "and" */
+db.alunos2.find({
+    $or : [
+        {"curso.nome": "Sistemas de Informações"},
+        {"curso.nome": "Engenharia Quimica"},
+        {"curso.nome": "Moda"}
+    ],
+    "nome": "Daniela"
+})
+
+
+/* Filtrar com o "in" */
+db.alunos2.find({
+    "curso.nome": {
+        $in : ["Sistemas de Informações", "Engenharia Quimica" ]
+    }
+})
+
+/* Inserindo o setimo Aluno */
+db.alunos2.insert({
+    nome: "Fernando",
+    data_nascimento: ISODate('2003-01-01'),
+    notas: [10, 4.5, 7],
+    curso: {
+        nome: "Sistema de Informação"
+    } 
+})
+
+/* Pesquisar por curso.nome*/
+db.alunos2.find({ "curso.nome" : "Sistemas de Informações" })
+
+/* atualiza apenas uma linha */
+db.alunos2.update(
+ { "curso.nome" : "Sistema de Informação" },
+ {
+    $set : {
+        "curso.nome" : "Sistemas de Informações"
+    }
+ })
+
+ /*atualiza várias linhas */
+ db.alunos2.update(
+    {"curso.nome" : "Sistemas de Informações"},
+    {
+        $set : {
+            "curso.nome" : "Sistemas de Informação"
+        }
+    },  { 
+        multi : true
+    }
+ )
+
+ /* Insere no array */
+ db.alunos2.update (
+ {  "_id" : ObjectId("60fdc4c3139a832de0ab7e31")},
+ {
+     $push : {
+         notas : 8.5
+     }
+ })
+
+/*insere mais de um elemento no array */
+ db.alunos2.update (
+ {  "_id" : ObjectId("60fdc4c3139a832de0ab7e31")},
+ {
+     $push : {
+         notas : { $each : [ 8.5 ,  3 ] }
+     }
+ })
+
+ /* Pesquisa o Aluno com nota 8.5 */
+ db.alunos2.find({
+     "notas" : 8.5
+ })
+
+/* Pesquisa alunos com notas maiores que 5 */
+db.alunos2.find({
+    notas : { $gt : 5 }
+})
+
+/* Inserindo mais alunos */
+db.alunos2.insert({
+    nome: "Andre",
+    data_nascimento : ISODate('01.01.2001'),
+    curso : {
+        nome : "Matematica"
+    },
+    notas : [ 7 , 9 , 5 , 4.5]
+})
+
+db.alunos2.insert({
+    nome: "Lucia",
+    data_nascimento : ISODate('01.01.2002'),
+    curso : {
+        nome : "Matematica"
+    },
+    notas : [ 8 , 9.5 , 10]
+})
+
+
+/* Pesquisa apenas um aluno com nota maior que 5 */
+db.alunos2.findOne({
+    notas : { $gt : 5 }
+})
+
+/* Retorna todos alunos ordenado crescente pelo nome */
+db.alunos2.find().sort({"nome":1})
+
+/* Retorna todos alunos ordenado DEcrescente pelo nome */
+db.alunos2.find().sort({"nome":-1})
+
+/* Retorna os 3 primeiros alunos ordenado crescente pelo nome */
+db.alunos2.find().sort({"nome":1}).limit(3)
+
+/* incluir o endereço para o Felipe */
+db.alunos2.update (
+ {  "_id" : ObjectId("60fdcafe139a832de0ab7e35")},
+ {
+     $set : {
+         localizacao : {
+            endereco : "Rua Vereda da Cruz, 26" 
+        }
+     }
+ })
+
+ db.alunos2.insertMany({
+     
+ })

@@ -1,0 +1,14 @@
+db.artigos.find({ categorias:
+"Programação"})
+
+db.artigos.find({ categorias:
+"Programação"}).explain("executionStats")
+
+/* criar o indice por ordem alfabetica de categoria */
+db.artigos.createIndex({ categorias: 1});
+
+/* criar o indice por ordem alfabetica de slug */
+db.artigos.createIndex({ slug: 1});
+
+/* listar os indices existentes */
+db.artigos.getIndexes();

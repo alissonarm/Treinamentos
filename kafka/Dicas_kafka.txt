@@ -1,0 +1,19 @@
+Criado pelo Linkedin em 2011, o Apache Kafka é uma plataforma de streaming distribuída mundialmente conhecida por sua performance e 
+escalabilidade. 
+
+O KAFKA permite produzir mensagens, armazená-las e consumi-las conforme ocorrem. 
+Mensagem: dado ou informação que deseja ser trafegada.
+Tópico: É como categorizamos e salvamos a mensagem.
+Producer: É quem produz a mensagem;
+Consumer: É quem consome as mensagens produzidas para um tópico
+Broker: É quem hospeda os tópicos e salva todas as mensagens
+
+
+1) Comando para levantar o zookeeper: Dentro da pasta bin execute: 
+   .\zookeeper-server-start.sh config/zookeeper.properties
+
+
+2) Comando para levantar o kafka: Dentro da pasta bin execute: 
+   .\kafka-server-start.sh config/server.properties
+
+

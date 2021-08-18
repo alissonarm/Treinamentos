@@ -1,0 +1,178 @@
+db.produtos.insertOne({
+    marca: "Apple",
+    modelo: "iPhone 11",
+    descricao: "Celular Top",
+    sistema: "iOS 13",
+    memoria: "128GB",
+    chips: 1,
+    preco: NumberDecimal("8999.99")
+})
+
+db.clientes.insertOne({
+    nome: "Alisson",
+    endereco: "Rua Vereda da Cruz, 26",
+    email: "alisson@example.com",
+    senha: "ali1234"
+})
+
+db.clientes.insertOne({
+    nome: "Ricardo",
+    endereco: "Rua do Ouvidor, 50",
+    email: "ricardo@example.com",
+    senha: "ric1234"
+})
+
+db.produtos.update({
+   modelo: "iPhone 11" 
+ }, {
+  $set: {
+      quantidade: 7
+  }    
+})
+
+/* atualiza todos os registros, criando um subdocumento que armazena um array de produtos */ 
+db.clientes.updateMany({},
+{
+    $set: {
+        carrinho: {
+            produtos: []
+        }
+    }
+})
+
+/* procura o produto iPhone 11 e subtrai 1 da quantidade exibindo a marca, o modelo e o preco */
+var produto = db.produtos.findOneAndUpdate({
+    modelo: "iPhone 11",
+    quantidade: {
+        $gt: 0
+    }
+}, {
+    $inc: {
+        quantidade: -1
+    }
+}, {
+    projection: {
+        marca: 1,
+        modelo: 1,
+        preco: 1
+
+    }
+})
+
+/* incluir a variavel produto no carrinho */
+db.clientes.update({
+    nome: "Alisson"
+}, {
+    $push: {
+        "carrinho.produtos" : produto
+    }
+})
+
+db.clientes.aggregate ([
+    {
+        $match: {
+            nome: "Ricardo" 
+        }
+    }, 
+    {
+        $project: {
+            _id: 0,
+            id_cliente: "$_id",
+            endereco: "$endereco",
+            data: ISODate(),
+            produtos:"$carrinho.produtos",
+            valorTotal: {
+                $sum: "$carrinho.produtos.preco"
+            }
+        }
+    },
+    {
+        $merge: "pedidos"
+    }
+]).pretty()
+
+db.clientes.update({
+    nome: "Ricardo"
+},{
+    $set: {
+        "carrinho.produtos": []
+    }
+})
+
+db.lojas.insertOne({
+    nome: "Apple Store",
+    endereco: "Av Roque Petroni Junior, 1080",
+})
+
+var magazineLuiza = db.lojas.findOne({
+    nome: "Magazine Luiza"
+})
+
+var fastShop = db.lojas.findOne({
+    nome: "Fast Shop"
+})
+
+db.produtos.update({
+    modelo: "Moto G7"
+}, {
+    $set: {
+        vendido_em:[magazineLuiza._id, fastShop._id]
+    }
+})
+
+var iphone11 = db.produtos.findOne({
+    modelo: "iPhone 11"
+})
+
+var iphone8 = db.produtos.findOne({
+    modelo: "iPhone 8"
+})
+
+db.lojas.update({
+    nome: "Apple Store"
+}, {
+    $set: {
+        produtos: [iphone11._id, iphone8._id]
+    }
+})
+
+db.lojas.aggregate([{
+    $match: {
+        nome: "Apple Store"
+    }
+}, {
+        $lookup: {
+            from: "produtos",
+            localField: "produtos",
+            foreignField: "_id",
+            as: "listaProdutos"
+        }
+}]).pretty()
+
+db.produtos.aggregate([{
+    $match: {
+        modelo: "Moto G7"
+    }
+}, {
+    $lookup: {
+        from: "lojas",
+        localField: "vendido_em",
+        foreignField: "_id",
+        as: "listaLojas"
+    }
+}]).pretty()
+
+/*atualiza  varios retirando o produto */
+db.lojas.updateMany({},{
+    $unset: {
+        produtos: 1
+    }
+})
+
+var appleStore = db.lojas.findOne({
+    nome: "Apple Store"
+})
+
+db.produtos.findOne({
+    vendido_em: appleStore._id
+})

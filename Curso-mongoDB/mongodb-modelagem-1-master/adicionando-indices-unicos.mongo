@@ -1,0 +1,13 @@
+db.artigos.createIndex({ slug:1}, {unique:true })
+
+
+/* deletar o indice slug_1 */
+db.artigos.dropIndex('slug_1')
+
+/* Listar indices */
+db.artigos.getIndexes()
+
+/*deletar um registro */
+db.artigos.deleteOne({
+    slug: 'projeto-caelum-nas-faculdades'
+})

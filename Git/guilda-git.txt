@@ -1,0 +1,27 @@
+Clonando o repositorio : git clone repositorio
+
+Erro de certificados
+vai na browser, clica no cadeado e baixa a cadeia de certificados. Cria uma pasta para armazenar o certificado.
+no prompt : git config --global http.sslCAInfo (endereco que baixou o certificado)
+
+
+git status
+git add .
+git commit -m "comentario"
+git branch development
+git checkout development
+
+git pull - traz as alterações (atualiza)
+
+
+extensões do visual studio - gitlens, git history
+
+git config -l --show-origin
+git config core.autocrlf input
+
+melhores praticas:
+- gitignore;
+- proteção de Branches;
+- code review;
+- coloboração com GIT
+- 

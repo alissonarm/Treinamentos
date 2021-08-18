@@ -1,0 +1,54 @@
+Modificadores de acesso / visibilidade
+
+1) publico: visivel em todo lugar;
+2) protected : vísivel para os filhos;
+3) <<package private>>: visível dentro do pacote;
+4 ) private: vísivel dentro da classe;
+
+Gerando o .jar (código compilado, o "class files"); -  
+- No projeto clique com o botão direito e selecione "Export";
+- Na caixa de diálogo selecione a opção "JAR file" e em seguida next;
+- Na nova caixa selecione a pasta que será exportada(apenas o conteúdo da pasta src);
+
+utilizando o .jar gerado:
+1) crie um novo projeto; 
+2) crie uma nova pasta (libs);
+3) arraste o arquivo .jar para esta pasta(libs);
+4) selecione o arquivo .jar com o botão direito e selecione a opção "Build Path > Add to Buid Path"
+
+
+
+System.out.println("Treino")
+
+pacote: java.lang
+
+ponto(.) : significa navegação entre classes.
+
+System: 
+- é um a classe;
+-  acesso publico(public)
+
+out:
+- atributo;
+- publico(public);
+- referência;
+- Sobrecarga: Mesmo método, porém com assinaturas diferentes(parâmetros diferentes);
+- Não joga exceções do tipo checked;
+
+
+Sobrescrita: Está relacionada com herança. Métodos com a mesma assinatura. 
+- static(atributo da classe);
+
+println:
+- método;
+- publico(public);
+- não static;
+
+Temos a classe Object no topo da hierarquia.
+
+(obj == null) ? "null" : obj.toString(); 
+ () ==> if 
+ ? ==> então 
+ :  ==> senão
+
+se obj igual a null então devolve "null" senão obj.toString()

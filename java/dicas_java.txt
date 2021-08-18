@@ -1,0 +1,68 @@
+Plataforma JAVA:
+- Portável;
+- Facil;
+- Segura;
+- Onipresente.
+
+Máquina Virtual JAVA
+
+					Código      (linguagem java)
+					  |
+				  Executável    ( bytecode java) 
+				      |
+					 JVM
+					  |
+			 Linux ou Windows ou MAC	
+			 
+			 
+java e jdbc: trabalhando com banco de dados
+
+MYSQL 
+- CREATE DATABASE loja_virtual;
+- USE loja_virtual;
+- CREATE TABLE PRODUTO (id INT AUTO_INCREMENT, nome VARCHAR(50) NOT NULL, descricao VARCHAR(255), PRIMARY KEY(id)) Engine = InnoDB;
+
+
+			 
+Aplicação JAVA <===> JDBC - java Database Connectivity ( java.sql.* )<===> DRIVER (Biblioteca Java, .JAR) <===> MYSQL
+
+
+Para acessar o banco de dados, precisamos de um driver
+Um driver nada mais é do que uma biblioteca (JAR)
+JDBC significa Java DataBase Conectivity
+JDBC define uma camada de abstração entre a sua aplicação e o driver do banco de dados
+Essa camada possui, na sua grande maioria, interfaces que o driver implementa
+Para abrir uma conexão, devemos usar o método getConnection, da classe DriverManager
+O método getConnection recebe uma string de conexão JDBC, que define a URL, usuário, senha, etc
+
+
+
+
+=========================== JAVA QUARKUS
+
+https://code.quarkus.io/ ==> ajuda na criação de projetos;
+
+
+
+mvn package quarkus:dev  ==> roda o projeto no modo desenvolvedor
+mvn install quarkus:dev
+mvn install quarkus:dev -DskipTests   ( não executa os testes)
+
+mvn package -Pnative : gerar a imagem nativa da nossa aplicação
+
+Um dos motivos do Quarkus ser muito rápido em tempo de inicialização, é que ele utiliza uma técnica chamada Ahead-of-time (AOT) e 
+isso significa que o código será compilado antecipadamente. Essa técnica irá ajudar a eliminar sobrecargas de compilação durante a 
+execução da aplicação. Isto é feito transformando o bytecode da VM (Virtual Machine) em código de máquina. 
+Em aplicações padrões, o que ocorre é que o bytecode será executado e frequentemente o código será compilado para linguagem de máquina, 
+usando o Just-in-Time (JIT).
+
+Para poder gerar a imagem nativa de nossas aplicações, foi necessário fazer o download da Graal VM. Hoje existem 3 distribuições: Oracle Graal VM Community Edition (CE), Oracle Graal VM Enterprise Edition (EE) e Mandrel. As diferenças entre elas nós veremos agora.
+
+Oracle Graal VM Community Edition: Considerada uma high-performance runtime, provê melhoras significativas na performance de aplicações e considerada ideal para microserviços. É suportada por todas as linguagens que rodam na JVM (Java Virtual Machine). Baseada na OpenJDK 8u262 e 11.0.8. Versão gratuita para todos os propósitos.
+
+Oracle Graal VM Enterprise Edition: Possui as mesmas características da Graal VM CE, porém há uma melhora na performance, escalabilidade e segurança. Versão não gratuita.
+
+Mandrel: Distribuição específica para construir imagens nativas do Quarkus. As versões do Mandrel são construídas a partir da base de código do Oracle Graal VM CE, com algumas exclusões de recursos que não são necessários para aplicativos nativos do Quarkus. Usa a versão do projeto OpenJDK padrão do jdk11u.
+
+É importante ressaltar que não é necessário usar a Graal VM caso não seja necessário criar a imagem nativa da sua aplicação. Pode-se usar a OpenJDK ou qualquer outra JVM para rodar a aplicação, porém mesmo nessas circunstâncias, a Graal VM ainda tende a ser mais performática.
+

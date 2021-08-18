@@ -1,0 +1,3 @@
+Metodologia de aplicações 12 Fatores
+
+- Seguir todos os fatores em um projeto pequeno que não precisa de tanto pode simplesmente aumentar a complexidade sem trazer vantagens.

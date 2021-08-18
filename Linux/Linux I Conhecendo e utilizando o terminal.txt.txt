@@ -58,3 +58,89 @@ dd: remove uma linha (n* dd remove *n linhas)
 Para voltarmos à navegação e saírmos do modo de inclusão, pressionamos a tecla ESC. Para salvarmos essas alterações usamos o comando :w e para sair do VI, digitamos :q.
 
 Podemos juntar os comandos de salvar e sair em apenas um comando: :wq. Se quisermos sair sem salvar, precisamos usar o comando :q!.
+
+
+
+====================== 
+
+1) man top  ==> apresenta informações sobre determinado comando. 
+
+1) ps     ==> Apresenta os processos que estão sendo executados.
+
+2) ps -e  ==> Apresenta todos os processos do linux
+   ps -ef ==> Apresenta todos os processos do linux com detalhes 
+   ps -ef | grep firefox ==> O programa grep pega a saida do comando (ps -ef) e filtra procurando o processo firefox  
+   pstree   ==> apresenta a árvore de processos
+
+3) cat google.txt | grep "Larry Page and Sergey Brin"  ==> Imprime, no terminal, as linhas que contêm o termo "Larry Page and Sergey Brin" do arquivo google.txt
+
+4) kill ID_PROCESSO    ==> Solicita o encerramento do processo informando o numero identificador. 
+   kill -9 ID_PROCESSO ==> Força o encerramento do processo.  
+   killall firefox     ==> Solicita o encerramento de todos os processos com o firefox;
+   killall -9 firefox  ==> Força o encerramento de todos os processos com firefox.   
+
+5) top ==> Informa o consumo de cpu
+   top -u lucas ==> Para mostrar apenas os processos de um determinado usuário 
+   
+6) jobs: mostra os processos que estão sendo executados dentro do bash;
+
+7) fg e bg: jogam os processos para foreground e background, respectivamente;
+
+8) [programa] &: abre o [programa] diretamente em background;
+
+9) gedit dorme &:  Criar um arquivo de gedit, já em background, com o nome dorme;
+
+10) sh dorme : solicita que o bash execute o arquivo;
+
+11) chmod +x dorme: atribui a permissão de execução(x);
+    chmod --> muda as permissões
+
+12) whoami : descobrir o usuario atual;
+
+13) ls -l: listar as permissões;
+    ls -l /usr --> listar as permissões da pasta /usr
+
+14) locate firefox: pesquisa a palavra firefox;
+
+15) sudo updatedb: atualizar o banco de dados interno com o nome dos arquivos.
+    Para executar um programa como super usuário, ou seja, como usuário principal da máquina usamos o comando sudo antes do comando a ser executado;
+	
+16) which firefox --> procurar o local diretorio do firefox	
+
+17) passwd --> muda a senha do usuario 
+
+18) sudo passwd --> muda a senha do usuario root
+
+19) su usuario --> se loga com outro usuario 
+
+20) adduser jose --> adicionar o usuario jose
+
+21) variaveis de ambiente PATH: 
+    env --> lista as váriaveis de ambiente;
+	env | grep PATH --> lista 
+	PATH=$PATH:/home/guilherme/workspace --> adiciona o caminho no path atual; 
+
+22) gedit .bashrc & --> editar o arquivo no modo background;
+
+23) sudo apt-get update --> atualiza os programas instalados
+
+24) apt-cache search ftp --> Este comando busca na lista de pacotes disponíveis, qualquer programa que se encaixe nesse termo de busca, por isso retorna uma longa lista de programas.
+
+25) sudo apt-get install vsftpd --> instalar o programa vsftpd
+
+26) sudo apt-get remove vsftpd --> remove o programa instalados
+
+27) sudo dpkg -i vsftpd_3.0.2-17+deb8u1_i386.deb --> instalar o programa (-i -> indica instalando)
+
+28) sudo dpkg -r [nome do pacote] --> remover o pacote
+
+29) ps -ef | grep vsftpd --- listar vsftpd
+    sudo service vsftpd stop --> parar a execução do programa
+    sudo service vsftpd start --> iniciar a execução do programa	
+
+30) Portanto, existem basicamente três passos para instalar um programa a partir de seu código fonte:
+    a) ./configure -> para verificar as dependências e configurações da máquina.
+    b) make -> para gerar o programa, ou seja, compilar. Lembrando que, neste passo, pode haver outras dependências necessárias para a tarefa e por isso talvez seja preciso realizar instalações de outras bibliotecas.
+    c) sudo make install -> para que o programa seja instalado em nossa máquina. Lembrando que o sudo é necessário por causa de questões de permissão.
+
+	
