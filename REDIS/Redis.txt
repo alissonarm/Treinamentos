@@ -1,0 +1,127 @@
+
+
+
+Redis é um banco de dados que armazena os dados na forma de chave-valor.
+
+1) redis-cli: conectar no servidor REDIS;
+2) ECHO "TESTE" : pingar a conexão;
+3) SET "total_de_cursos" 1200   : para setar um valor na chave; 
+   SET "ultimo_usuario_que_se_logou" "Alisson" 
+   SET sorteio:25-08-2021:megasena "2, 10, 15, 20, 28, 32" - padronização da chave
+   TYPE "ultimo_usuario_que_se_logou" : devolve o tipo da informção 
+   
+4) GET "total_de_cursos" : recuperar o valor da chave;
+   GET "ultimo_usuario_que_se_logou"
+   
+5) DEL "ultimo_usuario_que_se_logou" : remove o valor da chave informada;
+   GET "ultimo_usuario_que_se_logou" : neste caso devolve nada
+   
+6) KEYS * : retorna todas as chaves do REDIS   
+   keys "resultado:*-*-2021"        - filtro de pesquisa
+   keys "resultado:*-*-2021:megasena" - filtro de pesquisa
+   keys "resultado:*-?8-2021"        - filtro de pesquisa
+   KEYS "resultado:?[37]-??-????:megasena"   : retorna quaisquer dias 3 e 7;
+   KEYS resultado:1[57]-??-????:*sena        : retorna os dias 15 e 17;
+
+7) Para inserir multiplos chaves-valores: 
+   MSET resultado:03-05-2015:megasena "1, 3, 17, 19, 24, 26" resultado:22-04-2015:megasena "15, 18, 20, 32, 37, 41" resultado:15-04-2015:megasena "10, 15, 18, 22, 35, 43"
+
+8) Adicionar um hash:(hash serve para armazenar mais de um valor numa chave, em um dicionário de dados.)
+   HSET resultado:24-05-2015:megasena "numeros" "13, 17, 19, 25, 28, 32"
+   HSET resultado:24-05-2015:megasena "ganhadores" 23
+   HMSET nome_da_chave campo1 "Ola" campo2 "Mundo"      ==> atribui varios valores para o hash
+   HMSET "resultado:05-06-2015:megasena" "numeros" "5, 19, 23, 28, 46, 49" "ganhadores" "16" ==> atribui varios valores para o hash
+   HMSET "sessao:usuari:1675" "nome" "alisson" "total_de_produtos" "3" "sobrenome" "augusto"
+   
+9) Para pegar os valores do HASH:
+    HGET resultado:24-05-2015:megasena "numeros"    ==> "13, 17, 19, 25, 28, 32"
+	HGET resultado:24-05-2015:megasena "ganhadores" ==> 23
+	HGETALL "resultado:05-06-2015:megasena"   ==>  recupera os numeros e ganhadores
+
+10) Deletar o hash:    
+    HDEL resultado:24-05-2015:megasena "numeros"
+	
+11) EXPIRE "sessao:usuario:1675" 1200    ==> expirar a sessao por 1200 segundos
+12) TTL "sessao:usuario:1675"   ==> informa o tempo que falta para expirar(deletar)
+
+13) INCR pagina:/contato:25-08-2021      ==> incrementa o contador da chave 
+    DECR pagina:/contato:25-05-2015      ==> decrementa o contador da chave  
+    INCRBY compras:25-08-2021:valor 10   ==> incrementa valores 
+	HINCRBY "jogador:1" "pontos" 10   ==> incrementa valores em hash
+	HINCRBYFLOAT "jogador:1" "pontos" 10.5   ==> incrementa valores decimais em hash
+	DECRBY compras:25-05-2015:valor 2    ==> decrementa valores  
+	INCRBYFLOAT compras:25-08-2021:valor 5.50  ==> incrementa valores decimais.
+	
+14) SETBIT acesso:25-08-2021 12345 1
+    Usuario 12345 teve um acesso(no caso informei 1, verdadeiro);
+
+    GETBIT acesso:25-08-2021 12345 
+    Consulta se o usuario 12345 teve algum acesso( 0 - não e 1 - sim ) 	
+	
+	GETBIT acesso:25-e-26-06-2015 12345
+	Consulta se o usuario 12345 acessou os dois dias( 0 - não e 1 - sim )  
+	
+	BITCOUNT acesso:25-08-2021 
+	Retorna a quantidade de usuarios marcados na chave informada
+	
+	BITCOUNT acesso:25-e-26-08-2021 
+	Quantas pessoas acessaram os dois dias
+	
+	BITOP AND acesso:25-e-26-08-2021 acesso:25-08-2021 acesso:26-08-2021
+    BITOP OR  acesso:25-e-26-08-2021 acesso:25-08-2021 acesso:26-08-2021
+	
+	GETBIT acesso:25-OU-26-06-2015 12345 
+    Consulta se o usuario 12345 acessou em algum dos dias ( 0 - não e 1 - sim ) 
+
+    BITCOUNT acesso:25-ou-26-08-2021 
+	Quantas pessoas acessaram um dos dois dias	
+	
+	
+15) LPUSH ==> Inserir um elemento a esquerda:
+    LPUSH ultimas_noticias "noticia A"
+
+
+16) RPUSH ==> inserir elementos a direita 
+    RPUSH "fila:confirma-email" "alisson"
+ 
+17) LINDEX ultimas_noticias 3 ==> devolve a noticia no index 3
+
+18) LLEN ultimas_noticias ==>  devolve a quantidade de elementos das ultimas_noticias 	
+
+19) LRANGE ultimas_noticias 0 2 ==> devolve os elementos nos indeces 0 e 2
+
+20) LTRIM ultimas_noticias 0 2 => mantem as noticias entre as posições 0 e 2
+
+21) LPOP "fila:confirma-email"  ==> Arranca um elemento a esquerda da fila 
+    BLPOP "fila:confirma-email"  30 ==> Realiza o bloqueio por 30 segundos e Arranca um elemento a esquerda da fila 
+	BLPOP "fila:confirma-email"   0 ==> Realiza o bloqueio por tempo indeterminado e Arranca um elemento a esquerda da fila 
+    RPOP "fila:confirma-email"  ==> Arranca um elemento a direita da fila 
+	
+22) SADD "relacionamentos:guilherme" ana lucia
+    adiciona elementos a um conjunto
+	
+23) SCARD "relacionamentos:guilherme"  ==> devolve a quantidade de elementos do conjunto
+
+24) SMEMBERS "relacionamentos:guilherme" ==> listar os elementos do conjunto
+
+25) SISMEMBER "relacionamentos:guilherme" carlos  ==> procura um elemento no conjunto
+
+26) SREM  "relacionamentos:guilherme" carlos  ==> remove um elemento do conjunto
+
+27) SINTER "relacionamentos:guilherme" "relacionamentos:carlos"   ==> retorna os elementos que existem nos dois conjuntos.
+
+28) SDIFF "relacionamentos:guilherme" "relacionamentos:marcela"   ==> retorna os elementos que existem no conjunto guilherme menos o que existe no conjunto marcela.
+
+29) ZADD "pontuacoes" 4567 paulo ==> adiciona em um conjunto ordenado;
+    TYPE "pontuacoes" ==> retorna  o tipo de informações 
+	ZCARD pontuacoes  ==> retorna a quantidade de elementos
+    ZRANGE pontuacoes 0 4 ==> retorna os elementos em ordem crescente 
+	ZRANGE pontuacoes 0 -1 ==> retorna os elementos em ordem crescente até o ultimo elemento ( o número negativo indica os ultimos elementos)
+	ZRANGE pontuacoes 0 4 WITHSCORES ==> retorna os elementos em ordem crescente  COM AS PONTUACOES
+    ZREVRANGE pontuacoes 0 4 ==> retorna os elementos em ordem decrescente 
+	ZSCORE pontuacoes guilherme   ==> retorna a pontuação do guilherme
+	ZRANK pontuacoes guilherme  ==> devolve a posição de guilherme
+	ZINCRBY pontuacoes 6000 guilherme    ==> incrementar a pontuação de guilherme
+
+30) 	
+	

@@ -9,11 +9,23 @@ Consumer: É quem consome as mensagens produzidas para um tópico
 Broker: É quem hospeda os tópicos e salva todas as mensagens
 
 
-1) Comando para levantar o zookeeper: Dentro da pasta bin execute: 
-   .\zookeeper-server-start.sh config/zookeeper.properties
+1) Comando para levantar o zookeeper: Dentro da pasta WINDOWS execute: 
+   kafka\kafka_2.13-2.8.0/bin/windows>zookeeper-server-start.bat ..\..\config\zookeeper.properties 
 
 
-2) Comando para levantar o kafka: Dentro da pasta bin execute: 
-   .\kafka-server-start.sh config/server.properties
+2) Comando para levantar o kafka: Dentro da pasta WINDOWS execute: 
+   kafka\kafka_2.13-2.8.0/bin/windows>kafka-server-start.bat ..\..\config\server.properties       
+
+3) criar tópico:
+   kafka\kafka_2.13-2.8.0/bin/windows>kafka-topics.bat --create --topic tutorialspedia --bootstrap-server localhost:9092
+   
+4) verificar o tópico criado:
+   kafka\kafka_2.13-2.8.0/bin/windows>kafka-topics.bat --list --bootstrap-server localhost:9092
+
+
+5) consumer  
+   kafka\kafka_2.13-2.8.0/bin/windows>kafka-topics.bat --list --bootstrap-server localhost:9092
+ 
+   
 
 

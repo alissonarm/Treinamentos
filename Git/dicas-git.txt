@@ -1,6 +1,11 @@
 1) Clonando o projeto: 
 git clone https://github.com/jcfonsecagit/repositorio.git
 
+1.1) clonar uma branch especifica 
+git clone -b <branchname> <remote-repo-url>
+git clone -b develop https://fontes.intranet.bb.com.br/sgn/sgn-gravar-debug-api/sgn-gravar-debug-api.git
+
+
 2) listar as versões do projeto: 
 git tag ( executar o comando dentro do diretório clonado)
 
@@ -160,7 +165,7 @@ vim ~/.gitconfig
 
 
 git checkout master: altera o local de trabalho para a branch master
-git pull: atualiza o histórico da branch master
+git pull	: atualiza o histórico da branch master
 git checkout dev: altera o local de trabalho para a branch dev
 git rebase master: atualiza o HEAD da branch dev para receber as alterações da branch master
 git checkout master: altera o local de trabalho novamente para a branch master

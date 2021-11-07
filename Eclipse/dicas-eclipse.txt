@@ -12,7 +12,7 @@ ctrl+W      ==> fechar a aba selecionada.
 ctrl+N      ==> criar novo arquivo(classe, projeto, interface, enum ) 
 ctrl+espaço ==> completar código (classe, métodos, etc) 
 ctrl+PgUp ou ctrl+PgDown ==> Para navegar nas abas abertas
-ctrl+shift+G ==> Encontra onde é utilizados a classe ou metodo;
+ctrl+shift+G ==> Pesquisa onde é utilizados a classe ou metodo;
 ctrl+shift+T ==> Abre uma classe pelo nome;
 ctrl+shift+F ==> formatar e identar o código
 ctrl+shift+W ==> Fecha todas as janelas abertas
